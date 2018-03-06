@@ -16,9 +16,11 @@ Vue.use(VueMeta)
 
 // Main app
 import App from '/imports/ui/App.vue';
+import store from '/imports/vuex/store'
 
 Meteor.startup(() => {
     new Vue({
+        store,
         render: h => h(App),
 }).$mount('app');
 });
