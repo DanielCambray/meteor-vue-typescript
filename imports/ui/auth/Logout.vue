@@ -1,5 +1,7 @@
 <template>
-    <button @click="logout">Logout</button>
+    <form class="form-inline">
+        <button class="btn btn-primary" @click="logout" type="button">Logout</button>
+    </form>
 </template>
 
 <script>

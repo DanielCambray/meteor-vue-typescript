@@ -1,5 +1,8 @@
 <template>
     <div class="app container">
+
+        <navbar></navbar>
+
         <h1>Test Meteor + Vue + Typescript</h1>
 
         <auth></auth>
@@ -17,6 +20,7 @@
     import Links from './Links.vue';
     import Auth from '/imports/ui/auth/Auth.vue'
     import Users from '/imports/ui/Users.vue'
+    import Navbar from '/imports/ui/NavBar.vue'
 
     export default {
         name: 'app',
@@ -37,9 +41,10 @@
             
         },
         components: {
+            Navbar,
             Links,
             Auth,
-            Users
+            Users,
         },
         metaInfo: {
             title: 'Links',
