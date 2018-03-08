@@ -7,7 +7,6 @@ const users = {
     },
     mutations: {
         updateUsers(state, value) {
-            console.log('users state mutated')
             state.users = value
         }
     },

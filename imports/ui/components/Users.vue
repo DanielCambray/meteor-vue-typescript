@@ -17,9 +17,6 @@
                 'users': [],
             },
             usersHelper() {
-                console.log("UsersHelper");
-                console.log(Meteor.users.find({}).fetch());
-                console.log("End");
                 return this.$store.commit('users/updateUsers', Meteor.users.find({}).fetch())
             }
         },
@@ -27,7 +24,6 @@
             users() {
                 return this.$store.state.users.users
             },
-
         },
         methods: {
 

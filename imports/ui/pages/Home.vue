@@ -1,7 +1,5 @@
-<template>
+App.vue<template>
     <div class="app container">
-
-        <navbar></navbar>
 
         <h1>Test Meteor + Vue + Typescript</h1>
 
@@ -17,13 +15,12 @@
     import Vue from 'vue';
     import Component from 'vue-class-component';
 
-    import Links from './Links.vue';
+    import Links from '/imports/ui/components/Links.vue';
     import Auth from '/imports/ui/auth/Auth.vue'
-    import Users from '/imports/ui/Users.vue'
-    import Navbar from '/imports/ui/NavBar.vue'
+    import Users from '/imports/ui/components/Users.vue'
 
     export default {
-        name: 'app',
+        name: 'home',
         data() {
             return {
             }
@@ -33,21 +30,18 @@
             },
             meteorUser() {
                 this.$store.commit('account/updateUser', Meteor.user());
-
-                console.log(Meteor.users.find({}).fetch());
             }
         },
         methods: {
             
         },
         components: {
-            Navbar,
             Links,
             Auth,
             Users,
         },
         metaInfo: {
-            title: 'Links',
+            title: 'Home',
         },
         computed: {
 

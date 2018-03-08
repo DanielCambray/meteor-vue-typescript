@@ -1,8 +1,9 @@
+<!-- /imports/ui/AppMenu.vue -->
 <template>
-    <div>
 
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="#">Navbar</a>
+            <router-link :to="{ name:'home', exact: true }"  class="navbar-brand" >Navbar</router-link>
+
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -10,10 +11,13 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                        <router-link :to="{ name:'home', exact: true }" class="nav-link" >Home</router-link>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Link</a>
+                        <router-link :to="{ name:'test' }" class="nav-link">Test</router-link>
+                    </li>
+                    <li class="nav-item" v-if="user">
+                        <router-link :to="{ name:'user' }" class="nav-link">User</router-link>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -32,20 +36,14 @@
                 </ul>
 
                 <authmenu></authmenu>
-                
+
             </div>
 
-
         </nav>
-
-    </div>
 </template>
 
 <script lang="ts">
 
-    import Loginform from '/imports/ui/auth/LoginForm.vue'
-    import Logindialog from '/imports/ui/auth/LoginDialog.vue'
-    import Registerdialog from '/imports/ui/auth/RegisterDialog.vue'
     import AuthMenu from '/imports/ui/auth/AuthMenu.vue'
 
     export default {
@@ -57,27 +55,21 @@
         meteor: {
             data: {
             },
-            meteorUser() {
-                this.$store.commit('account/updateUser', Meteor.user());
-            }
         },
         methods: {
 
         },
         components: {
             authmenu : AuthMenu,
-            Loginform,
-            Logindialog,
-            Registerdialog
         },
         metaInfo: {
 
         },
         computed: {
-
-
+            user() {
+                return this.$store.state.account.user
+            }
         },
     }
-
-
+    
 </script>

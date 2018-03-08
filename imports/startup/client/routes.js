@@ -1,23 +1,32 @@
-/*
-import { FlowRouter } from 'meteor/kadira:flow-router';
-import { BlazeLayout } from 'meteor/kadira:blaze-layout';
+import { RouterFactory } from 'meteor/akryum:vue-router2'
 
-// Import needed templates
-import '../../ui/layouts/body/body.js';
-import '../../ui/pages/home/home.js';
-import '../../ui/pages/not-found/not-found.js';
+// Components
+import Home from '/imports/ui/pages/Home.vue'
+import User from '/imports/ui/pages/User.vue'
+import Test from '/imports/ui/pages/Test.vue'
+import NotFound from '/imports/ui/pages/NotFound.vue'
 
-// Set up all routes in the app
-FlowRouter.route('/', {
-  name: 'App.home',
-  action() {
-    BlazeLayout.render('App_body', { main: 'App_home' });
-  },
-});
-
-FlowRouter.notFound = {
-  action() {
-    BlazeLayout.render('App_body', { main: 'App_notFound' });
-  },
-};
-*/
+RouterFactory.configure(factory => {
+    // Simple routes
+    factory.addRoutes([
+        {
+            path: '/',
+            name: 'home',
+            component: Home,
+        },
+        {
+            path: '/user',
+            name: 'user',
+            component: User,
+        },
+        {
+            path: '/test',
+            name: 'test',
+            component: Test,
+        },
+        {
+            path: '*',
+            component: NotFound,
+        }
+    ])
+})
