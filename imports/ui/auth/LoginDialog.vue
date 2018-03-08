@@ -23,9 +23,11 @@
                         </div>
 
                     </form>
+
+                    <div class="alert alert-danger" role="alert" id="login-dialog-msg" v-if="loginError.reason">{{loginError.reason}}</div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit" @click="submitForm()">Login</button>
                 </div>
             </div>
@@ -44,11 +46,17 @@
                 }
             }
         },
+        computed : {
+            loginError() {
+                return this.$store.state.account.loginError;
+            }
+        },
         methods: {
             submitForm() {
-                this.$store.dispatch('account/submitLoginForm', this.formData);
-                $('#login-dialog').modal('hide');
-
+                this.$store.dispatch('account/submitLoginForm', this.formData).then(function(){
+                    $('#login-dialog').modal('hide');
+                }).catch(function(error){
+                });
             }
         }
     }

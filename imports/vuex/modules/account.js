@@ -5,6 +5,8 @@ const account = {
     namespaced: true,
     state: {
         user: null,
+        loginError: {},
+        registerError: {},
     },
     mutations: {
         updateUser(state, value) {
@@ -12,17 +14,39 @@ const account = {
         },
         isUsernameValid(state, value) {
             state.isUsernameValid = value
+        },
+        updateLoginError(state, value) {
+            state.loginError = value;
+        },
+        updateRegisterError(state, value) {
+            state.registerError = value;
         }
     },
     actions: {
         submitRegisterForm({commit, state}, formData) {
-            Accounts.createUser(formData, error => {
-                error ? console.log(error.reason) : console.log('user registered')
+            return new Promise((resolve, reject)=> {
+                Accounts.createUser(formData, function(error) {
+                    if (error) {
+                        commit('updateRegisterError', error);
+                        reject(error);
+                    } else {
+                        commit('updateRegisterError', {});
+                        resolve();
+                    }
+                })
             })
         },
         submitLoginForm({commit, state}, formData) {
-            Meteor.loginWithPassword(formData.username, formData.password, error => {
-                error ? console.log(error.reason) : console.log('user logged in')
+            return new Promise((resolve, reject)=> {
+                Meteor.loginWithPassword(formData.username, formData.password, function(error) {
+                    if (error) {
+                        commit('updateLoginError', error);
+                        reject(error);
+                    } else {
+                        commit('updateLoginError', {});
+                        resolve();
+                    }
+                })
             })
         },
         logout() {

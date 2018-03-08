@@ -30,6 +30,8 @@
                             <input v-model="formData.password" class="form-control mr-sm-2" type="password" placeholder="Password">
                         </div>
 
+                        <div class="alert alert-danger" role="alert" id="register-dialog-msg" v-if="registerError.reason">{{registerError.reason}}</div>
+
                     </form>
                 </div>
                 <div class="modal-footer">
@@ -53,10 +55,18 @@
                 }
             }
         },
+        computed : {
+            registerError() {
+                return this.$store.state.account.registerError;
+            }
+        },
         methods: {
             submitForm() {
-                this.$store.dispatch('account/submitRegisterForm', this.formData);
-                $('#register-dialog').modal('hide');
+
+                this.$store.dispatch('account/submitRegisterForm', this.formData).then(function(){
+                    $('#register-dialog').modal('hide');
+                }).catch(function(error){
+                });
 
             }
         }
